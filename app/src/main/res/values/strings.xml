@@ -5,4 +5,7 @@
     <string name="messageText" translatable="false">Нетология. Университет интернет-профессий.</string>
     <string name="messageDate">5 ноября в 17:10</string>
     <string name="message" translatable="false">Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, дизайну, аналитике и управлению. Мы растём сами и помогаем студентам: от новичков до уверенных профессианалов. Но самое важноеостаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиься точнее, бежать быстрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен.</string>
+    <string name="likesCounter" translatable="false">54</string>
+    <string name="shareCounter" translatable="false">3</string>
+    <string name="viewsCounter" translatable="false">112</string>
 </resources>
