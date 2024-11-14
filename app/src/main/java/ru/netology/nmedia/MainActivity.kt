@@ -20,19 +20,19 @@ class MainActivity : AppCompatActivity() {
             likedByMe = false
         )
 
-        binding.like.setImageResource(
-            if (post.likedByMe) {
-                R.drawable.red_favorite_24
-            } else {
-                R.drawable.grey_favorite_border_24
-            }
-        )
+
 
 
 
         binding.like.setOnClickListener {
             post.likedByMe = !post.likedByMe
-
+            binding.like.setImageResource(
+                if (post.likedByMe) {
+                    R.drawable.red_favorite_24
+                } else {
+                    R.drawable.grey_favorite_border_24
+                }
+            )
         }
 
     }
