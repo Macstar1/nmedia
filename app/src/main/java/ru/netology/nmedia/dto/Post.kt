@@ -6,4 +6,6 @@ class Post(
     val published: String = "",
     val author: String = "",
     var likedByMe: Boolean = false,
+    var likeCounter: Int = 0,
+    var shared: Int = 0,
 )
