@@ -30,9 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         updateLike(binding, post)
         increaseShare(binding, post)
-        binding.root.setOnClickListener { println("root") }
-        binding.like.setOnClickListener{ println("like") }
-        binding.icNetology48dp.setOnClickListener{ println("avatar") }
+
     }
 
     private fun increaseShare(
