@@ -15,6 +15,11 @@ android {
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    
+    buildFeatures {
+
+        buildFeatures.viewBinding = true
+    }
 
     buildFeatures {
         viewBinding = true
@@ -39,6 +44,14 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.room.ktx)
+    val lifecycle_version = "2.8.7"
+    val arch_version = "2.2.0"
+    val activity_version = "1.9.2"
+
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.activity.ktx)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

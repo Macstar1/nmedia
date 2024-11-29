@@ -8,4 +8,8 @@
     <string name="likesCounter" translatable="false">54</string>
     <string name="shareCounter" translatable="false">3</string>
     <string name="viewsCounter" translatable="false">112</string>
+    <string name="remove">Remove</string>
+    <string name="save" translatable="false">Save</string>
+    <string name="error_message">Cannot be empty</string>
+    <string name="edit">Edit</string>
 </resources>
