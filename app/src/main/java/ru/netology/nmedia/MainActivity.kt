@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, R.string.error_message, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
+
             viewModel.saveContent(text)
             with(binding) {
                 content.setText("")
@@ -57,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.undo.setOnClickListener {
+            viewModel.edited.value = Post()
             with(binding) {
                 content.setText("")
                 content.clearFocus()
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.post.observe(this) { posts ->
-            posts.map { post ->
+            posts.map {
                 val new = adapter.currentList.size < posts.size
                 adapter.submitList(posts) {
                     if (new) {
