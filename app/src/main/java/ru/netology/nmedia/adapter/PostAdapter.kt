@@ -10,8 +10,6 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostCardBinding
 import ru.netology.nmedia.dto.Post
 
-typealias Callback = (Post) -> Unit
-
 interface OnInteractionListener {
     fun onLike(post: Post)
     fun onRemove(post: Post)
@@ -22,7 +20,6 @@ interface OnInteractionListener {
 class PostAdapter(
     private val onInteractionListener: OnInteractionListener,
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback) {
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -82,11 +79,10 @@ class PostViewHolder(
                     }
                 }
             }.show()
-
         }
     }
 
-    fun toShort(i: Int): String {
+    private fun toShort(i: Int): String {
         return when (i) {
             in 0..999 -> "" + i
             in 1_000..9_999 -> "" + (i / 100).toDouble() / 10 + "K"
@@ -107,5 +103,4 @@ object PostDiffCallback : DiffUtil.ItemCallback<Post>() {
     override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
         return oldItem == newItem
     }
-
 }

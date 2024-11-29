@@ -1,6 +1,7 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,12 +16,12 @@ import ru.netology.nmedia.util.focusAndShowKeyboard
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var binding = ActivityMainBinding.inflate(layoutInflater)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
 
-        val adapter = PostAdapter(object: OnInteractionListener{
+        val adapter = PostAdapter(object : OnInteractionListener {
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
             }
@@ -36,7 +37,6 @@ class MainActivity : AppCompatActivity() {
             override fun onShare(post: Post) {
                 viewModel.increaseShare(post.id)
             }
-
         })
 
         binding.list.adapter = adapter
@@ -48,8 +48,20 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
             viewModel.saveContent(text)
-            binding.content.setText("")
-            binding.content.clearFocus()
+            with(binding) {
+                content.setText("")
+                content.clearFocus()
+                group.visibility = View.GONE
+            }
+            AndroidUtils.hideKeyboard(it)
+        }
+
+        binding.undo.setOnClickListener {
+            with(binding) {
+                content.setText("")
+                content.clearFocus()
+                group.visibility = View.GONE
+            }
             AndroidUtils.hideKeyboard(it)
         }
 
@@ -63,13 +75,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        viewModel.edited.observe(this){
-            if (it.id != 0L){
-                binding.content.setText(it.content)
-                binding.content.focusAndShowKeyboard()
-//                binding.content.requestFocus()
-            }
 
+        viewModel.edited.observe(this) {
+            if (it.id != 0L) {
+                with(binding) {
+                    oldContent.text = it.content
+                    group.visibility = View.VISIBLE
+                    content.setText(it.content)
+                    content.focusAndShowKeyboard()
+//                    content.requestFocus()
+                }
+            }
         }
     }
 }

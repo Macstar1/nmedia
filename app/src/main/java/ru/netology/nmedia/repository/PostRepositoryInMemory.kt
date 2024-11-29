@@ -93,4 +93,8 @@ class PostRepositoryInMemory : PostRepository {
         data.value = posts
     }
 
+    override fun undo(post: Post) {
+        data.value = posts
+    }
+
 }

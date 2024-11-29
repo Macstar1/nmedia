@@ -12,4 +12,11 @@
     <string name="save" translatable="false">Save</string>
     <string name="error_message">Cannot be empty</string>
     <string name="edit">Edit</string>
+    <string name="undo" translatable="false">undo</string>
+    <string name="ic_edit" translatable="false">ic_edit</string>
+    <string name="edit_message">Edit Message</string>
+    <string name="share_button" translatable="false">Share button</string>
+    <string name="menu_icon" translatable="false">Menu icon</string>
+    <string name="like_button" translatable="false">Like button</string>
+    <string name="view_icon" translatable="false">View icon</string>
 </resources>

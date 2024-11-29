@@ -19,24 +19,45 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/post_card" />
 
+    <ImageButton
+        android:id="@+id/edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/ic_edit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/undo"
+        app:srcCompat="@drawable/ic_edit_48" />
+
     <TextView
         android:id="@+id/old_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:minHeight="48dp"
         android:background="@android:color/transparent"
+        android:minHeight="48dp"
+        android:text=""
         app:layout_constraintBottom_toTopOf="@+id/content"
         app:layout_constraintEnd_toStartOf="@id/undo"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/edit" />
+
+    <TextView
+        android:id="@+id/edit_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/edit_message"
+        android:textColor="#2C5286"
+        app:layout_constraintStart_toEndOf="@+id/edit"
+        app:layout_constraintBottom_toTopOf="@+id/old_content" />
 
     <ImageButton
         android:id="@+id/undo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/undo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/old_content"
+        app:layout_constraintTop_toTopOf="@+id/edit_message"
         app:srcCompat="@drawable/ic_cancel_48" />
 
     <EditText
@@ -67,13 +88,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="old_content" />
+        app:constraint_referenced_ids="undo" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:constraint_referenced_ids="old_content, undo" />
+        app:constraint_referenced_ids="old_content, undo, edit, edit_message" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
