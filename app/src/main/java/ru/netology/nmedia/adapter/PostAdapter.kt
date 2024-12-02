@@ -49,13 +49,14 @@ class PostViewHolder(
         messageDate.text = post.published
         likeCounter.text = toShort(post.likeCounter)
         shareCounter.text = toShort(post.shared)
-        like.setImageResource(
-            if (post.likedByMe) {
-                R.drawable.red_favorite_24
-            } else {
-                R.drawable.grey_favorite_border_24
-            }
-        )
+        like.isChecked = post.likedByMe
+//        like.setImageResource(
+//            if (post.likedByMe) {
+//                R.drawable.red_favorite_24
+//            } else {
+//                R.drawable.grey_favorite_border_24
+//            }
+//        )
         like.setOnClickListener {
             onInteractionListener.onLike(post)
         }

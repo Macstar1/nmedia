@@ -75,7 +75,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topBarrier" />
 
-    <ImageView
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
         android:contentDescription="@string/like_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainText"
-        app:srcCompat="@drawable/grey_favorite_border_24" />
+        android:button="@drawable/like_selector" />
 
     <TextView
         android:id="@+id/likeCounter"

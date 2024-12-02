@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.undo.setOnClickListener {
-            viewModel.edited.value = Post()
+            viewModel.clearEdit()
             with(binding) {
                 content.setText("")
                 content.clearFocus()
