@@ -47,9 +47,10 @@ class PostViewHolder(
         mainText.text = post.content
         messageText.text = post.author
         messageDate.text = post.published
-        likeCounter.text = toShort(post.likeCounter)
-        shareCounter.text = toShort(post.shared)
+//        shareCounter.text = toShort(post.shared)
+        share.setText(post.shared.toString())
         like.isChecked = post.likedByMe
+        like.setText(post.likeCounter.toString())
 //        like.setImageResource(
 //            if (post.likedByMe) {
 //                R.drawable.red_favorite_24
