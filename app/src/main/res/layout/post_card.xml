@@ -88,7 +88,7 @@
         android:contentDescription="@string/like_button"
         app:icon="@drawable/like_selector"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainText" />
+        app:layout_constraintTop_toBottomOf="@+id/video_group" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/share"
@@ -123,5 +123,23 @@
         app:layout_constraintEnd_toStartOf="@+id/viewsCounter"
         app:layout_constraintTop_toTopOf="@+id/viewsCounter"
         app:srcCompat="@drawable/grey_eye_24" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/video_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="video_button"
+        app:layout_constraintTop_toBottomOf="@id/mainText" />
+
+    <ImageButton
+        android:id="@+id/video_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:contentDescription="Video image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

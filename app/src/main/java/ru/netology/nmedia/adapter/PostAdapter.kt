@@ -1,5 +1,6 @@
 package ru.netology.nmedia.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
@@ -43,21 +44,14 @@ class PostViewHolder(
     private val binding: PostCardBinding,
     private val onInteractionListener: OnInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
+    @SuppressLint("SetTextI18n")
     fun bind(post: Post) = with(binding) {
         mainText.text = post.content
         messageText.text = post.author
         messageDate.text = post.published
-//        shareCounter.text = toShort(post.shared)
-        share.setText(post.shared.toString())
+        share.text = toShort(post.shared)
         like.isChecked = post.likedByMe
-        like.setText(post.likeCounter.toString())
-//        like.setImageResource(
-//            if (post.likedByMe) {
-//                R.drawable.red_favorite_24
-//            } else {
-//                R.drawable.grey_favorite_border_24
-//            }
-//        )
+        like.text = toShort(post.likeCounter)
         like.setOnClickListener {
             onInteractionListener.onLike(post)
         }
