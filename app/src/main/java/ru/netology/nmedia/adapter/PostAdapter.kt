@@ -1,5 +1,6 @@
 package ru.netology.nmedia.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
@@ -9,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostCardBinding
 import ru.netology.nmedia.dto.Post
-
-typealias Callback = (Post) -> Unit
 
 interface OnInteractionListener {
     fun onLike(post: Post)
@@ -22,7 +21,6 @@ interface OnInteractionListener {
 class PostAdapter(
     private val onInteractionListener: OnInteractionListener,
 ) : ListAdapter<Post, PostViewHolder>(PostDiffCallback) {
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -46,19 +44,14 @@ class PostViewHolder(
     private val binding: PostCardBinding,
     private val onInteractionListener: OnInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
+    @SuppressLint("SetTextI18n")
     fun bind(post: Post) = with(binding) {
         mainText.text = post.content
         messageText.text = post.author
         messageDate.text = post.published
-        likeCounter.text = toShort(post.likeCounter)
-        shareCounter.text = toShort(post.shared)
-        like.setImageResource(
-            if (post.likedByMe) {
-                R.drawable.red_favorite_24
-            } else {
-                R.drawable.grey_favorite_border_24
-            }
-        )
+        share.text = toShort(post.shared)
+        like.isChecked = post.likedByMe
+        like.text = toShort(post.likeCounter)
         like.setOnClickListener {
             onInteractionListener.onLike(post)
         }
@@ -82,11 +75,10 @@ class PostViewHolder(
                     }
                 }
             }.show()
-
         }
     }
 
-    fun toShort(i: Int): String {
+    private fun toShort(i: Int): String {
         return when (i) {
             in 0..999 -> "" + i
             in 1_000..9_999 -> "" + (i / 100).toDouble() / 10 + "K"
@@ -107,5 +99,4 @@ object PostDiffCallback : DiffUtil.ItemCallback<Post>() {
     override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
         return oldItem == newItem
     }
-
 }

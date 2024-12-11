@@ -24,6 +24,7 @@ class PostRepositoryInMemory : PostRepository {
             likedByMe = false,
             likeCounter = 92,
             shared = 92,
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         ),
         Post(
             id = nextId++,
@@ -90,6 +91,10 @@ class PostRepositoryInMemory : PostRepository {
                 if (it.id != post.id) it else it.copy(content = post.content)
             }
         }
+        data.value = posts
+    }
+
+    override fun undo(post: Post) {
         data.value = posts
     }
 
