@@ -145,7 +145,7 @@
         android:layout_marginEnd="16dp"
         android:contentDescription="Video image"
         android:scaleType="centerInside"
-        android:src="@mipmap/maxresdefault"
+        android:src="@drawable/maxresdefault"
         app:layout_constraintEnd_toEndOf="@id/video_group"
         app:layout_constraintStart_toStartOf="@id/video_group"
         app:layout_constraintTop_toTopOf="@id/video_group" />

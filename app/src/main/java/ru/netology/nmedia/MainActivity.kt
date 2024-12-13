@@ -1,6 +1,7 @@
 package ru.netology.nmedia
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -44,6 +45,16 @@ class MainActivity : AppCompatActivity() {
                     putExtra(Intent.EXTRA_TEXT, post.content)
                 }
                 val shareIntent = Intent.createChooser(intent, post.content)
+                startActivity(shareIntent)
+            }
+
+            override fun onVideo(post: Post) {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    type = "text/plain"
+                    putExtra(Intent.EXTRA_TEXT, post.video)
+                }
+                val shareIntent = Intent.createChooser(intent, post.video)
                 startActivity(shareIntent)
             }
         })

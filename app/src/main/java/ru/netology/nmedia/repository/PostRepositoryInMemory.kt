@@ -98,4 +98,8 @@ class PostRepositoryInMemory : PostRepository {
         data.value = posts
     }
 
+    override fun video() {
+
+    }
+
 }
