@@ -60,23 +60,28 @@ class PostViewHolder(
         share.setOnClickListener {
             onInteractionListener.onShare(post)
         }
-        videoButton.setOnClickListener{
+        videoButton.setOnClickListener {
+            onInteractionListener.onVideo(post)
+        }
+        playButtonCircle.setOnClickListener {
             onInteractionListener.onVideo(post)
         }
         videoGroup.visibility = if (post.video.isBlank()) View.GONE else View.VISIBLE
-        menu.setOnClickListener{
+        menu.setOnClickListener {
             PopupMenu(it.context, it).apply {
                 inflate(R.menu.menu_options)
                 setOnMenuItemClickListener {
-                    when(it.itemId){
+                    when (it.itemId) {
                         R.id.remove -> {
                             onInteractionListener.onRemove(post)
                             true
                         }
+
                         R.id.edit -> {
                             onInteractionListener.onEdit(post)
                             true
                         }
+
                         else -> false
                     }
                 }

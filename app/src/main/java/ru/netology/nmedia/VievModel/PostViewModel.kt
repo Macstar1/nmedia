@@ -6,6 +6,7 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.PostRepositoryInMemory
 
 private val empty = Post()
+
 class PostViewModel : ViewModel() {
     private val repository = PostRepositoryInMemory()
     val post = repository.getAll()
@@ -24,7 +25,7 @@ class PostViewModel : ViewModel() {
         edited.value = post
     }
 
-    fun clearEdit(){
+    fun clearEdit() {
         edited.value = empty
     }
 

@@ -1,5 +1,6 @@
 package ru.netology.nmedia
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -20,7 +21,10 @@ class MainActivity : AppCompatActivity() {
         val viewModel: PostViewModel by viewModels()
 
         val newPostLauncher = registerForActivityResult(NewPostContract) { result ->
-            result ?: return@registerForActivityResult
+            if (result == null) {
+                viewModel.clearEdit()
+                return@registerForActivityResult
+            }
             viewModel.saveContent(result)
         }
 
@@ -49,13 +53,20 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onVideo(post: Post) {
-                val intent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    type = "text/plain"
-                    putExtra(Intent.EXTRA_TEXT, post.video)
+                val youtubeLink = post.video
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(youtubeLink)
+                    // Ограничение выбора только определённого приложения
+                    setPackage("com.google.android.youtube") // applicationId можно посмотреть в Device Explorer: data/data
                 }
-                val shareIntent = Intent.createChooser(intent, post.video)
-                startActivity(shareIntent)
+
+                try {
+                    startActivity(intent) // Попробовать открыть с выбранным приложением
+                } catch (e: ActivityNotFoundException) {
+                    // Если приложение недоступно, открыть там где это возможно
+                    val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeLink))
+                    startActivity(webIntent)
+                }
             }
         })
 
@@ -64,32 +75,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.list.adapter = adapter
-//        binding.save.setOnClickListener {
-//            val text = binding.content.text.toString()
-//
-//            if (text.isBlank()) {
-//                Toast.makeText(this, R.string.error_message, Toast.LENGTH_LONG).show()
-//                return@setOnClickListener
-//            }
-//
-//            viewModel.saveContent(text)
-//            with(binding) {
-//                content.setText("")
-//                content.clearFocus()
-//                group.visibility = View.GONE
-//            }
-//            AndroidUtils.hideKeyboard(it)
-//        }
-//
-//        binding.undo.setOnClickListener {
-//            viewModel.clearEdit()
-//            with(binding) {
-//                content.setText("")
-//                content.clearFocus()
-//                group.visibility = View.GONE
-//            }
-//            AndroidUtils.hideKeyboard(it)
-//        }
 
         viewModel.post.observe(this) { posts ->
             posts.map {
@@ -101,17 +86,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-//        viewModel.edited.observe(this) {
-//            if (it.id != 0L) {
-//                with(binding) {
-//                    oldContent.text = it.content
-//                    group.visibility = View.VISIBLE
-//                    content.setText(it.content)
-//                    content.focusAndShowKeyboard()
-////                    content.requestFocus()
-//                }
-//            }
-//        }
     }
 }
