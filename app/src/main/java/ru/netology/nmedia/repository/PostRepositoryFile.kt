@@ -72,9 +72,12 @@ class PostRepositoryFile(private val context: Context) : PostRepository {
 
                 posts = gson.fromJson(it, token)
                 data.value = posts
-                nextId = posts.maxOf { it.id } + 1
+                if (posts.isEmpty()) {
+                    nextId = 1L
+                } else {
+                    nextId = posts.maxOf { it.id } + 1
+                }
             }
-
         } else {
             sync()
         }
