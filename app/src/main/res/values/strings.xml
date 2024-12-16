@@ -19,7 +19,7 @@
     <string name="menu_icon" translatable="false">Menu icon</string>
     <string name="like_button" translatable="false">Like button</string>
     <string name="view_icon" translatable="false">View icon</string>
-    <string name="video_image">Video image</string>
-    <string name="play_button">Play button</string>
-    <string name="savebutton">SaveButton</string>
+    <string name="video_image" translatable="false">Video image</string>
+    <string name="play_button" translatable="false">Play button</string>
+    <string name="savebutton" translatable="false">SaveButton</string>
 </resources>
