@@ -2,6 +2,7 @@ package ru.netology.nmedia.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -16,6 +17,7 @@ interface OnInteractionListener {
     fun onRemove(post: Post)
     fun onEdit(post: Post)
     fun onShare(post: Post)
+    fun onVideo(post: Post)
 }
 
 class PostAdapter(
@@ -58,19 +60,28 @@ class PostViewHolder(
         share.setOnClickListener {
             onInteractionListener.onShare(post)
         }
-        menu.setOnClickListener{
+        videoButton.setOnClickListener {
+            onInteractionListener.onVideo(post)
+        }
+        playButtonCircle.setOnClickListener {
+            onInteractionListener.onVideo(post)
+        }
+        videoGroup.visibility = if (post.video.isBlank()) View.GONE else View.VISIBLE
+        menu.setOnClickListener {
             PopupMenu(it.context, it).apply {
                 inflate(R.menu.menu_options)
                 setOnMenuItemClickListener {
-                    when(it.itemId){
+                    when (it.itemId) {
                         R.id.remove -> {
                             onInteractionListener.onRemove(post)
                             true
                         }
+
                         R.id.edit -> {
                             onInteractionListener.onEdit(post)
                             true
                         }
+
                         else -> false
                     }
                 }

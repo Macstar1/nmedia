@@ -132,7 +132,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:visibility="visible"
-        app:constraint_referenced_ids="video_button"
+        app:constraint_referenced_ids="video_button,play_button_circle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/mainText"
         app:layout_constraintTop_toBottomOf="@id/mainText" />
@@ -143,11 +143,25 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:contentDescription="Video image"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/video_image"
         android:scaleType="centerInside"
-        android:src="@mipmap/maxresdefault"
+        android:src="@drawable/maxresdefault"
         app:layout_constraintEnd_toEndOf="@id/video_group"
         app:layout_constraintStart_toStartOf="@id/video_group"
         app:layout_constraintTop_toTopOf="@id/video_group" />
+
+    <ImageButton
+        android:id="@+id/play_button_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/play_button"
+        app:layout_constraintBottom_toBottomOf="@+id/video_button"
+        app:layout_constraintEnd_toEndOf="@+id/video_button"
+        app:layout_constraintStart_toStartOf="@+id/video_button"
+        app:layout_constraintTop_toTopOf="@+id/video_button"
+        app:srcCompat="@drawable/ic_play_circle_48" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
