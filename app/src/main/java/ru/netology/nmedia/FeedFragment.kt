@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import ru.netology.nmedia.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.VievModel.PostViewModel
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostAdapter
@@ -83,6 +84,15 @@ class FeedFragment : Fragment() {
         }
 
         binding.list.adapter = adapter
+
+        viewModel.edited.observe(viewLifecycleOwner) {
+            if (it.id != 0L) {
+                findNavController().navigate(
+                    R.id.action_feedFragment_to_newPostFragment,
+                    Bundle().apply { textArg = it.content }
+                )
+            }
+        }
 
         viewModel.post.observe(viewLifecycleOwner) { posts ->
             posts.map {

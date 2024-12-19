@@ -12,9 +12,8 @@ import ru.netology.nmedia.databinding.ActivityAppBinding
 class AppActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         val binding = ActivityAppBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_app)
+        setContentView(binding.root)
 
         intent?.let {
             val text = it.getStringExtra(Intent.EXTRA_TEXT)
@@ -30,9 +29,8 @@ class AppActivity : AppCompatActivity() {
             }
             findNavController(R.id.main).navigate(
                 R.id.action_feedFragment_to_newPostFragment,
-                Bundle().apply {
-                    textArg = text
-                })
+                Bundle().apply { textArg = text }
+            )
         }
     }
 }

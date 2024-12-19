@@ -23,6 +23,7 @@ class NewPostFragment : Fragment() {
         val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
         arguments?.textArg?.let { binding.edit.setText(it) }
+
         val intent = Intent()
         binding.edit.setText(intent.getStringExtra("text_old"))
 
