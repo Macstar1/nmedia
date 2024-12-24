@@ -26,11 +26,13 @@ class AppActivity : AppCompatActivity() {
                         }
                         .show()
                 }
+                findNavController(R.id.main).navigate(
+                    R.id.action_feedFragment_to_newPostFragment,
+                    Bundle().apply { textArg = text }
+                )
             }
-            findNavController(R.id.main).navigate(
-                R.id.action_feedFragment_to_newPostFragment,
-                Bundle().apply { textArg = text }
-            )
+
+
         }
     }
 }
