@@ -18,6 +18,7 @@ interface OnInteractionListener {
     fun onEdit(post: Post)
     fun onShare(post: Post)
     fun onVideo(post: Post)
+    fun onView(post: Post)
 }
 
 class PostAdapter(
@@ -65,6 +66,9 @@ class PostViewHolder(
         }
         playButtonCircle.setOnClickListener {
             onInteractionListener.onVideo(post)
+        }
+        root.setOnClickListener {
+            onInteractionListener.onView(post)
         }
         videoGroup.visibility = if (post.video.isBlank()) View.GONE else View.VISIBLE
         menu.setOnClickListener {
