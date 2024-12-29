@@ -22,42 +22,21 @@ class NewPostFragment : Fragment() {
 
         val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
-        arguments?.textArg?.let { binding.edit.setText(it) }
+        arguments?.textArg?.let(binding.edit::setText)
 
-        val intent = Intent()
-        binding.edit.setText(intent.getStringExtra("text_old"))
+        binding.edit.requestFocus()
 
-        binding.ok.setOnClickListener{
+        binding.ok.setOnClickListener {
             val text = binding.edit.text.toString()
             if (text.isNotBlank()) {
                 viewModel.saveContent(text)
             }
             findNavController().navigateUp()
-//
-//            if (text.isBlank()) {
-//                Snackbar.make(binding.root, "Text is empty", Snackbar.LENGTH_INDEFINITE)
-//                    .setAction(android.R.string.ok){
-//                        activity?.finish()
-//                    }.show()
-//                activity?.setResult(RESULT_CANCELED)
-//            } else{
-//                activity?.setResult(RESULT_OK, Intent().apply { putExtra("text", text) })
-//            }
-//            activity?.finish()
         }
         return binding.root
     }
 
-    companion object{
+    companion object {
         var Bundle.textArg by StringArg
     }
-
 }
-//
-//object NewPostContract: ActivityResultContract<String?, String?>() {
-//    override fun createIntent(context: Context, input: String?): Intent {
-//        return Intent(context, NewPostFragment::class.java).putExtra("text_old", input)
-//    }
-//
-//    override fun parseResult(resultCode: Int, intent: Intent?) = intent?.getStringExtra("text")
-//}
