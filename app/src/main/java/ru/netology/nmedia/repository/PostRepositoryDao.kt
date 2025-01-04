@@ -132,7 +132,7 @@ class PostRepositoryDao(private val db: SQLiteDatabase) : PostRepository {
         db.execSQL(
             """
            UPDATE posts SET
-               likes = likes + CASE WHEN likedByMe THEN -1 ELSE 1 END,
+               likeCounter = likeCounter + CASE WHEN likedByMe THEN -1 ELSE 1 END,
                likedByMe = CASE WHEN likedByMe THEN 0 ELSE 1 END
            WHERE id = ?;
         """.trimIndent(), arrayOf(id)
