@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "ru.netology.nmedia"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "ru.netology.nmedia"
