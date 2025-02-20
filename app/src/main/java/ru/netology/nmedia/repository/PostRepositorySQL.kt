@@ -18,6 +18,7 @@ class PostRepositorySQL(
     }
 
     override fun increaseShare(id: Long) {
+        dao.increaseShare(id)
         posts = posts.map {
             if (it.id != id) it
             else {
@@ -25,7 +26,9 @@ class PostRepositorySQL(
             }
         }
         data.value = posts
+
     }
+
 
     override fun getAll(): LiveData<List<Post>> = data
 

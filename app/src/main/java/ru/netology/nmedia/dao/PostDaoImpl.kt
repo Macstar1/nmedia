@@ -108,6 +108,10 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
         )
     }
 
+    override fun increaseShare(id: Long) {
+        TODO("Not yet implemented")
+    }
+
     private fun map(cursor: Cursor): Post {
         with(cursor) {
             return Post(
