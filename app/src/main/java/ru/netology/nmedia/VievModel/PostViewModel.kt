@@ -35,4 +35,6 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         edited.value = empty
     }
 
+    fun shareById(id: Long) = repository.increaseShare(id)
+
 }

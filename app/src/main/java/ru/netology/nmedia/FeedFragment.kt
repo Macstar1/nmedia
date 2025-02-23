@@ -28,14 +28,6 @@ class FeedFragment : Fragment() {
         val binding = FragmentFeedBinding.inflate(inflater, container, false)
 
         val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
-//
-//        val newPostLauncher = registerForActivityResult(NewPostContract) { result ->
-//            if (result == null) {
-//                viewModel.clearEdit()
-//                return@registerForActivityResult
-//            }
-//            viewModel.saveContent(result)
-//        }
 
         val adapter = PostAdapter(object : OnInteractionListener {
             override fun onLike(post: Post) {
@@ -53,6 +45,7 @@ class FeedFragment : Fragment() {
             }
 
             override fun onShare(post: Post) {
+                viewModel.shareById(post.id)
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     type = "text/plain"

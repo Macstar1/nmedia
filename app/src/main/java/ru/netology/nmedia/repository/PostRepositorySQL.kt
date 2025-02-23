@@ -26,9 +26,7 @@ class PostRepositorySQL(
             }
         }
         data.value = posts
-
     }
-
 
     override fun getAll(): LiveData<List<Post>> = data
 
@@ -66,4 +64,5 @@ class PostRepositorySQL(
         posts = posts.filter { it.id != id }
         data.value = posts
     }
+
 }
