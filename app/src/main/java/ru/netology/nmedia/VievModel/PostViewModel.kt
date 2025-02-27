@@ -6,12 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.repository.PostRepository
-import ru.netology.nmedia.repository.PostRepositorySQL
+import ru.netology.nmedia.repository.PostRepositoryROOM
 
 private val empty = Post()
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: PostRepository = PostRepositorySQL(
+    private val repository: PostRepository = PostRepositoryROOM(
         AppDb.getInstance(application).postDao
     )
 
