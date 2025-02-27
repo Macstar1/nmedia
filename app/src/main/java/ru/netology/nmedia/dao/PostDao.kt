@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.entity.PostEntity
 
 @Dao
@@ -33,5 +32,10 @@ interface PostDao {
     @Query("DELETE FROM PostEntity WHERE id=:id")
     fun removeById(id: Long)
 
+    @Query("""
+        UPDATE PostEntity SET
+               shared = shared + 1
+           WHERE id = :id;
+    """)
     fun increaseShare(id: Long)
 }
