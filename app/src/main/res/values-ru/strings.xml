@@ -7,4 +7,6 @@
     <string name="error_message">Не может быть пустым</string>
     <string name="edit">Изменить</string>
     <string name="edit_message">Сообщение</string>
+    <string name="channel_remote_name">Сообщение сервера</string>
+    <string name="channel_remote_description">Сообщение с удадённого сервера</string>
 </resources>
