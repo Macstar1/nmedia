@@ -9,4 +9,6 @@
     <string name="edit_message">Сообщение</string>
     <string name="channel_remote_name">Сообщение сервера</string>
     <string name="channel_remote_description">Сообщение с удадённого сервера</string>
+    <string name="notification_user_liked">Пользователь %1$s поставил лайк посту %2$s</string>
+    <string name="notification_new_post">Пользователь %1$s добавил пост</string>
 </resources>
