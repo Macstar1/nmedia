@@ -32,6 +32,7 @@ android {
                 "proguard-rules.pro"
             )
         }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -65,4 +66,15 @@ dependencies {
     kapt(libs.room.compiler)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging.ktx)
+
+
+    // define a BOM and its version
+    implementation(platform(libs.okhttp.bom))
+
+    // define any required OkHttp artifacts without version
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+
+
+
 }
