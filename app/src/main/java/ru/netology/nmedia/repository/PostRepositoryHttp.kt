@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 class PostRepositoryHttp : PostRepository{
 
     private companion object {
-        const val BASE_URL = "http://192.168.0.109:9999/"
+        const val BASE_URL = "http://127.0.0.1:9999/"
         val jsonType = "application/json".toMediaType()
 
     }
@@ -30,7 +30,7 @@ class PostRepositoryHttp : PostRepository{
         TODO("Not yet implemented")
     }
 
-    override fun getAll(): LiveData<List<Post>> {
+    override fun getAll(): List<Post> {
         val request = Request.Builder()
             .get()
             .url("${BASE_URL}api/slow/posts")

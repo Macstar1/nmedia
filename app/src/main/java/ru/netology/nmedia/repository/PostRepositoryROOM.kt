@@ -22,7 +22,7 @@ class PostRepositoryROOM(
 //        data.value = posts
     }
 
-    override fun getAll(): LiveData<List<Post>> = dao.getAll().map { it.map {it.toDto()} }
+    override fun getAll(): List<Post> = dao.getAll().map { it.map {it.toDto()} } as List<Post>
 
     override fun save(post: Post) {
 //        val id = post.id
