@@ -45,6 +45,7 @@ class OnePostFragment : Fragment() {
             }
 
             override fun onShare(post: Post) {
+                viewModel.shareById(post.id)
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     type = "text/plain"
@@ -85,11 +86,11 @@ class OnePostFragment : Fragment() {
             }
         }
 
-        viewModel.post.observe(viewLifecycleOwner) { posts ->
-            val post = posts.find { it.id == id }
-            post?.let { holder.bind(it) }
-
-        }
+//        viewModel.post.observe(viewLifecycleOwner) { posts ->
+//            val post = posts.find { it.id == id }
+//            post?.let { holder.bind(it) }
+//
+//        }
         return binding.root
     }
 

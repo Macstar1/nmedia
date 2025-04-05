@@ -13,91 +13,141 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-<!--        app:layout_constraintBottom_toTopOf="@id/barrier"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:listitem="@layout/post_card" />-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/barrier"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        tools:listitem="@layout/post_card" />-->
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/edit"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:contentDescription="@string/ic_edit"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/undo"-->
-<!--        app:srcCompat="@drawable/ic_edit_48" />-->
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/edit"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@android:color/transparent"-->
+    <!--        android:contentDescription="@string/ic_edit"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/undo"-->
+    <!--        app:srcCompat="@drawable/ic_edit_48" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/old_content"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:minHeight="48dp"-->
-<!--        android:text=""-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/content"-->
-<!--        app:layout_constraintEnd_toStartOf="@id/undo"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/edit" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/old_content"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@android:color/transparent"-->
+    <!--        android:minHeight="48dp"-->
+    <!--        android:text=""-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/content"-->
+    <!--        app:layout_constraintEnd_toStartOf="@id/undo"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/edit" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/edit_message"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:text="@string/edit_message"-->
-<!--        android:textColor="#2C5286"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/edit"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/old_content" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/edit_message"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="8dp"-->
+    <!--        android:text="@string/edit_message"-->
+    <!--        android:textColor="#2C5286"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/edit"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/old_content" />-->
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/undo"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:contentDescription="@string/undo"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/edit_message"-->
-<!--        app:srcCompat="@drawable/ic_cancel_48" />-->
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/undo"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@android:color/transparent"-->
+    <!--        android:contentDescription="@string/undo"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/edit_message"-->
+    <!--        app:srcCompat="@drawable/ic_cancel_48" />-->
 
-<!--    <EditText-->
-<!--        android:id="@+id/content"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:hint="@string/save"-->
-<!--        android:importantForAutofill="no"-->
-<!--        android:inputType="text|textMultiLine"-->
-<!--        android:minHeight="48dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toStartOf="@id/save"-->
-<!--        app:layout_constraintStart_toStartOf="parent" />-->
+    <!--    <EditText-->
+    <!--        android:id="@+id/content"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@android:color/transparent"-->
+    <!--        android:hint="@string/save"-->
+    <!--        android:importantForAutofill="no"-->
+    <!--        android:inputType="text|textMultiLine"-->
+    <!--        android:minHeight="48dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toStartOf="@id/save"-->
+    <!--        app:layout_constraintStart_toStartOf="parent" />-->
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/save"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@android:color/transparent"-->
-<!--        android:contentDescription="@string/save"-->
-<!--        android:src="@drawable/ic_save_48"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/save"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@android:color/transparent"-->
+    <!--        android:contentDescription="@string/save"-->
+    <!--        android:src="@drawable/ic_save_48"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
-<!--    <androidx.constraintlayout.widget.Barrier-->
-<!--        android:id="@+id/barrier"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:barrierDirection="top"-->
-<!--        app:constraint_referenced_ids="undo" />-->
+    <!--    <androidx.constraintlayout.widget.Barrier-->
+    <!--        android:id="@+id/barrier"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:barrierDirection="top"-->
+    <!--        app:constraint_referenced_ids="undo" />-->
 
-<!--    <androidx.constraintlayout.widget.Group-->
-<!--        android:id="@+id/group"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:visibility="gone"-->
-<!--        app:constraint_referenced_ids="old_content, undo, edit, edit_message" />-->
+    <!--    <androidx.constraintlayout.widget.Group-->
+    <!--        android:id="@+id/group"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:constraint_referenced_ids="old_content, undo, edit, edit_message" />-->
+
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/error_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/retry"
+        app:layout_constraintBottom_toBottomOf="@id/errorText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+   <androidx.constraintlayout.widget.Group
+       android:id="@+id/errorGroup"
+       android:visibility="gone"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       app:constraint_referenced_ids="retry, errorText" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/save"
@@ -110,5 +160,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_circle_24" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

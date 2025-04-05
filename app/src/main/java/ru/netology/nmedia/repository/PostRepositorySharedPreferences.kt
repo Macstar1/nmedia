@@ -87,7 +87,7 @@ class PostRepositorySharedPreferences(context: Context) : PostRepository {
         data.value = posts
     }
 
-    override fun getAll(): LiveData<List<Post>> = data
+    override fun getAll(): List<Post> = data as List<Post>
 
     override fun likeById(id: Long) {
         posts = posts.map {
