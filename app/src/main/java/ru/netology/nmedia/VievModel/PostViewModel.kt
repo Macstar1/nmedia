@@ -30,8 +30,17 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     private val _data = MutableLiveData(FeedModel())
     val data: LiveData<FeedModel> = _data
 
-    val post = repository.getAll()
+    //val post = repository.getAll()
     val edited = MutableLiveData(empty)
+
+    fun save() {
+        thread {
+            edited.value?.let {
+                repository.save(it)
+            }
+            edited.postValue(empty)
+        }
+    }
 
     fun load() {
         thread {
