@@ -24,7 +24,7 @@ class PostRepositoryROOM(
 
     override fun getAll(): List<Post> = dao.getAll().map { it.map {it.toDto()} } as List<Post>
 
-    override fun save(post: Post) {
+    override fun save(post: Post): Post {
 //        val id = post.id
 //        val saved = dao.save(post)
 //        posts = if (id == 0L) {
@@ -35,6 +35,7 @@ class PostRepositoryROOM(
 //            }
 //        }
         dao.save(PostEntity.fromDto(post))
+        return TODO("Provide the return value")
     }
 
     override fun undo(post: Post) {}

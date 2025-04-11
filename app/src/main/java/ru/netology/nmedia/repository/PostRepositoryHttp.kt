@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import ru.netology.nmedia.dto.Post
 import java.util.concurrent.TimeUnit
 
@@ -49,8 +50,19 @@ class PostRepositoryHttp : PostRepository{
         TODO("Not yet implemented")
     }
 
-    override fun save(post: Post) {
-        TODO("Not yet implemented")
+    override fun save(post: Post): Post {
+        val request = Request.Builder()
+            .post(gson.toJson(post, Post::class.java).toRequestBody(jsonType))
+            .url("${BASE_URL}api/slow/posts")
+            .build()
+
+        val call = client.newCall(request)
+
+        val response = call.execute()
+
+        val responseBody = requireNotNull(response.body) { "Body is null" }
+
+        return gson.fromJson(responseBody.string(), Post::class.java)
     }
 
     override fun undo(post: Post) {

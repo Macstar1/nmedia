@@ -111,7 +111,7 @@ class PostRepositorySharedPreferences(context: Context) : PostRepository {
         data.value = posts
     }
 
-    override fun save(post: Post) {
+    override fun save(post: Post): Post {
         posts = if (post.id == 0L) {
             listOf(post.copy(id = nextId++, author = "Me", published = "Now")) + posts
         } else {
@@ -120,6 +120,7 @@ class PostRepositorySharedPreferences(context: Context) : PostRepository {
             }
         }
         data.value = posts
+        return TODO("Provide the return value")
     }
 
     override fun undo(post: Post) {
