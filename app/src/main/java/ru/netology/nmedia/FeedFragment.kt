@@ -90,15 +90,25 @@ class FeedFragment : Fragment() {
             }
         }
 
-        binding.retry.setOnClickListener {
-            viewModel.load()
+        with(binding) {
+            retry.setOnClickListener {
+                viewModel.load()
+            }
+            save.setOnClickListener {
+                findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
+            }
+            list.adapter = adapter
         }
-
-        binding.save.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
-        }
-
-        binding.list.adapter = adapter
+//
+//        binding.retry.setOnClickListener {
+//            viewModel.load()
+//        }
+//
+//        binding.save.setOnClickListener {
+//            findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
+//        }
+//
+//        binding.list.adapter = adapter
 
         viewModel.edited.observe(viewLifecycleOwner) {
             if (it.id != 0L) {
