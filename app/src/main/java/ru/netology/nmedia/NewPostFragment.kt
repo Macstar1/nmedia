@@ -18,7 +18,11 @@ class NewPostFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentNewPostBinding.inflate(inflater, container, false)
+        val binding = FragmentNewPostBinding.inflate(
+            inflater,
+            container,
+            false
+        )
 
         val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
 
@@ -29,7 +33,7 @@ class NewPostFragment : Fragment() {
         binding.ok.setOnClickListener {
             val text = binding.edit.text.toString()
             if (text.isNotBlank()) {
-                viewModel.saveContent(text)
+                viewModel.save()
             }
             findNavController().navigateUp()
         }
