@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 class PostRepositoryHttp : PostRepository{
 
     private companion object {
-        const val BASE_URL = "http://127.0.0.1:9999/"
+        const val BASE_URL = "http://192.168.0.104:9999/"
         val jsonType = "application/json".toMediaType()
 
     }
@@ -47,7 +47,14 @@ class PostRepositoryHttp : PostRepository{
     }
 
     override fun removeById(id: Long) {
-        TODO("Not yet implemented")
+        val request: Request = Request.Builder()
+            .delete()
+            .url("${BASE_URL}/api/slow/posts/$id")
+            .build()
+
+        client.newCall(request)
+            .execute()
+            .close()
     }
 
     override fun save(post: Post): Post {
