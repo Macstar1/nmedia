@@ -9,6 +9,7 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.model.FeedModel
 import ru.netology.nmedia.repository.PostRepository
 import ru.netology.nmedia.repository.PostRepositoryHttp
+import ru.netology.nmedia.util.SingleLiveEvent
 import kotlin.concurrent.thread
 
 private val empty = Post(
@@ -33,17 +34,20 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     //val post = repository.getAll()
     val edited = MutableLiveData(empty)
+    private val _postCreated = SingleLiveEvent<Unit>()
+    val postCreated: LiveData<Unit> = _postCreated
 
-    fun save() {
+    fun save() {edited.value?.let {
         thread {
-            edited.value?.let {
-                repository.save(it)
-            }
-            edited.postValue(empty)
+            repository.save(it)
+            _postCreated.postValue(Unit)
         }
+    }
+        edited.value = empty
     }
 
     fun load() {
+        _data.postValue(FeedModel(loading = true))
         thread {
             try {
                 val posts = repository.getAll()
@@ -65,17 +69,16 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     fun removeById(id: Long) {
         thread {
-            val old = _data.value?.posts.orEmpty()
-            _data.postValue(
-                _data.value?.copy(
-                    posts = _data.value?.posts.orEmpty()
-                        .filter { it.id != id }
-                )
-            )
+            val old = _data.value
+            val updatePosts = _data.value?.posts.orEmpty().filter {
+                it.id != id
+            }
+
+            _data.postValue(FeedModel(posts = updatePosts))
             try {
                 repository.removeById(id)
             } catch (e: IOException) {
-                _data.postValue(_data.value?.copy(posts = old))
+                _data.postValue(old)
             }
         }
     }
