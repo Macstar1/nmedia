@@ -25,9 +25,7 @@ private val empty = Post(
 class PostViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: PostRepository = PostRepositoryHttp()
 
-    init {
-        load()
-    }
+
 
     private val _data = MutableLiveData(FeedModel())
     val data: LiveData<FeedModel> = _data
@@ -37,6 +35,9 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     private val _postCreated = SingleLiveEvent<Unit>()
     val postCreated: LiveData<Unit> = _postCreated
 
+    init {
+        load()
+    }
     fun save() {edited.value?.let {
         thread {
             repository.save(it)
