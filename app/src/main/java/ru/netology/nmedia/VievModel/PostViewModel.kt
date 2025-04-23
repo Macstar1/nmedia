@@ -20,11 +20,11 @@ private val empty = Post(
     likedByMe = false,
     likeCounter = 0,
     shared = 0,
+    video = "",
 )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: PostRepository = PostRepositoryHttp()
-
 
 
     private val _data = MutableLiveData(FeedModel())
@@ -38,13 +38,23 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     init {
         load()
     }
-    fun save() {edited.value?.let {
+
+    fun save() {
         thread {
-            repository.save(it)
-            _postCreated.postValue(Unit)
+            edited.value?.let {
+                repository.save(it)
+            }
+            edited.postValue(empty)
         }
-    }
-        edited.value = empty
+
+//
+//        edited.value?.let {
+//            thread {
+//                repository.save(it)
+//                _postCreated.postValue(Unit)
+//            }
+//        }
+//        edited.value = empty
     }
 
     fun load() {
@@ -85,10 +95,12 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun saveContent(content: String) {
-        edited.value?.let {
-            repository.save(it.copy(content = content))
+        thread {
+            edited.value?.let {
+                repository.save(it.copy(content = content))
+            }
+            edited.postValue(empty)
         }
-        edited.value = empty
     }
 
     fun edit(post: Post) {
