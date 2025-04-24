@@ -43,6 +43,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         thread {
             edited.value?.let {
                 repository.save(it)
+                _postCreated.postValue(Unit)
             }
             edited.postValue(empty)
         }
