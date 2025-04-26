@@ -1,7 +1,6 @@
 package ru.netology.nmedia.repository
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -28,8 +27,8 @@ class PostRepositorySharedPreferences(context: Context) : PostRepository {
             published = "Сегодня",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, дизайну, аналитике и управлению. Мы растём сами и помогаем студентам: от новичков до уверенных профессианалов. Но самое важноеостаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиься точнее, бежать быстрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен.",
             likedByMe = false,
-            likeCounter = 992,
-            shared = 992,
+            likes = 992,
+//            shared = 992,
         ),
         Post(
             id = nextId++,
@@ -37,9 +36,9 @@ class PostRepositorySharedPreferences(context: Context) : PostRepository {
             published = "Вчера",
             content = "Наша миссия - помочь встать на путь роста и начать цепочку перемен.",
             likedByMe = false,
-            likeCounter = 92,
-            shared = 92,
-            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
+            likes = 92,
+//            shared = 92,
+//            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         ),
         Post(
             id = nextId++,
@@ -47,8 +46,8 @@ class PostRepositorySharedPreferences(context: Context) : PostRepository {
             published = "Сегодня",
             content = "3. Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, дизайну, аналитике и управлению. Мы растём сами и помогаем студентам: от новичков до уверенных профессианалов. Но самое важноеостаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиься точнее, бежать быстрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен.",
             likedByMe = false,
-            likeCounter = 992,
-            shared = 992,
+            likes = 992,
+//            shared = 992,
         ),
         Post(
             id = nextId++,
@@ -56,8 +55,8 @@ class PostRepositorySharedPreferences(context: Context) : PostRepository {
             published = "Вчера",
             content = "4. Наша миссия - помочь встать на путь роста и начать цепочку перемен.",
             likedByMe = false,
-            likeCounter = 92,
-            shared = 92,
+            likes = 92,
+//            shared = 92,
         )
 
     )
@@ -78,13 +77,13 @@ class PostRepositorySharedPreferences(context: Context) : PostRepository {
     }
 
     override fun increaseShare(id: Long) {
-        posts = posts.map {
-            if (it.id != id) it
-            else {
-                it.copy(shared = it.shared + 1)
-            }
-        }
-        data.value = posts
+//        posts = posts.map {
+//            if (it.id != id) it
+//            else {
+//                it.copy(shared = it.shared + 1)
+//            }
+//        }
+//        data.value = posts
     }
 
     override fun getAll(): List<Post> = data as List<Post>
@@ -95,10 +94,10 @@ class PostRepositorySharedPreferences(context: Context) : PostRepository {
             else {
                 it.copy(
                     likedByMe = !it.likedByMe,
-                    likeCounter = if (it.likedByMe) {
-                        it.likeCounter - 1
+                    likes = if (it.likedByMe) {
+                        it.likes - 1
                     } else {
-                        it.likeCounter + 1
+                        it.likes + 1
                     }
                 )
             }
