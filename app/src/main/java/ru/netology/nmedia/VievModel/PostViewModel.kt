@@ -18,9 +18,9 @@ private val empty = Post(
     published = "",
     content = "",
     likedByMe = false,
-    likeCounter = 0,
-    shared = 0,
-    video = "",
+    likes = 0,
+//    shared = 0,
+//    video = "",
 )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
@@ -112,6 +112,6 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         edited.value = empty
     }
 
-    fun shareById(id: Long) = repository.increaseShare(id)
+//    fun shareById(id: Long) = repository.increaseShare(id)
 
 }

@@ -54,7 +54,7 @@ class PostViewHolder(
         messageDate.text = post.published
         share.text = toShort(post.shared)
         like.isChecked = post.likedByMe
-        like.text = toShort(post.likeCounter)
+        like.text = toShort(post.likes)
         like.setOnClickListener {
             onInteractionListener.onLike(post)
         }

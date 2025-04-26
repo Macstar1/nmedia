@@ -45,14 +45,14 @@ class OnePostFragment : Fragment() {
             }
 
             override fun onShare(post: Post) {
-                viewModel.shareById(post.id)
-                val intent = Intent().apply {
-                    action = Intent.ACTION_SEND
-                    type = "text/plain"
-                    putExtra(Intent.EXTRA_TEXT, post.content)
-                }
-                val shareIntent = Intent.createChooser(intent, post.content)
-                startActivity(shareIntent)
+//                viewModel.shareById(post.id)
+//                val intent = Intent().apply {
+//                    action = Intent.ACTION_SEND
+//                    type = "text/plain"
+//                    putExtra(Intent.EXTRA_TEXT, post.content)
+//                }
+//                val shareIntent = Intent.createChooser(intent, post.content)
+//                startActivity(shareIntent)
             }
 
             override fun onVideo(post: Post) {

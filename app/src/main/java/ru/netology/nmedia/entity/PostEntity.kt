@@ -25,8 +25,8 @@ data class PostEntity(
         author,
         likedByMe,
         likeCounter,
-        shared,
-        video
+//        shared,
+//        video
     )
 
     companion object {
@@ -36,7 +36,7 @@ data class PostEntity(
             post.published,
             post.author,
             post.likedByMe,
-            post.likeCounter,
+            post.likes,
             post.shared,
             post.video
         )
