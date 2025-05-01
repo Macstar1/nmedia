@@ -49,7 +49,7 @@ class PostRepositoryHttp : PostRepository{
     override fun removeById(id: Long) {
         val request: Request = Request.Builder()
             .delete()
-            .url("${BASE_URL}/api/slow/posts/$id")
+            .url("${BASE_URL}api/slow/posts/$id")
             .build()
 
         client.newCall(request)
