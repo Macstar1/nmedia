@@ -47,15 +47,6 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
             }
             edited.postValue(empty)
         }
-
-//
-//        edited.value?.let {
-//            thread {
-//                repository.save(it)
-//                _postCreated.postValue(Unit)
-//            }
-//        }
-//        edited.value = empty
     }
 
     fun load() {
@@ -96,12 +87,11 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun saveContent(content: String) {
-        thread {
-            edited.value?.let {
-                repository.save(it.copy(content = content))
-            }
-            edited.postValue(empty)
+        val text = content.trim()
+        if (edited.value?.content == text) {
+            return
         }
+        edited.value = edited.value?.copy(content = text)
     }
 
     fun edit(post: Post) {
