@@ -43,7 +43,13 @@ class PostRepositoryHttp : PostRepository{
     }
 
     override fun likeById(id: Long) {
-        TODO("Not yet implemented")
+        val request = Request.Builder()
+            .url("${BASE_URL}api/slow/posts/$id/likes")
+            .build()
+
+        client.newCall(request)
+            .execute()
+            .close()
     }
 
     override fun removeById(id: Long) {
