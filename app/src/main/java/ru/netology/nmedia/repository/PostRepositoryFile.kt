@@ -95,21 +95,26 @@ class PostRepositoryFile(private val context: Context) : PostRepository {
 
     override fun getAll(): List<Post> = data as List<Post>
 
-    override fun likeById(id: Long) {
-        posts = posts.map {
-            if (it.id != id) it
-            else {
-                it.copy(
-                    likedByMe = !it.likedByMe,
-                    likes = if (it.likedByMe) {
-                        it.likes - 1
-                    } else {
-                        it.likes + 1
-                    }
-                )
-            }
-        }
-        data.value = posts
+    override fun likeById(id: Long): Post {
+//        posts = posts.map {
+//            if (it.id != id) it
+//            else {
+//                it.copy(
+//                    likedByMe = !it.likedByMe,
+//                    likes = if (it.likedByMe) {
+//                        it.likes - 1
+//                    } else {
+//                        it.likes + 1
+//                    }
+//                )
+//            }
+//        }
+//        data.value = posts
+        return TODO("Provide the return value")
+    }
+
+    override fun unlikeById(id: Long): Post {
+        TODO("Not yet implemented")
     }
 
     override fun removeById(id: Long) {
