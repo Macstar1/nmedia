@@ -6,7 +6,7 @@ data class Post(
     val content: String = "",
     val published: String = "",
     var likedByMe: Boolean = false,
-    val likes: Int = 0,
+    var likes: Int = 0,
 
 ) {
     val shared: Int = 0

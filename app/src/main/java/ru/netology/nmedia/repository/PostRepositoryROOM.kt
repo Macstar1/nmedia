@@ -40,7 +40,14 @@ class PostRepositoryROOM(
 
     override fun undo(post: Post) {}
 
-    override fun likeById(id: Long) = dao.likeById(id)
+    override fun likeById(id: Long): Post //= dao.likeById(id)
+    {
+        TODO("Provide the return value")
+    }
+
+    override fun unlikeById(id: Long): Post {
+        TODO("Not yet implemented")
+    }
 
     override fun removeById(id: Long) = dao.removeById(id)
 

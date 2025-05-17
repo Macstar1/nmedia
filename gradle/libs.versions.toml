@@ -1,6 +1,6 @@
 [versions]
 activityKtx = "1.10.1"
-agp = "8.9.1"
+agp = "8.9.2"
 firebaseBom = "33.11.0"
 gson = "2.12.1"
 kotlin = "1.9.0"
