@@ -14,7 +14,7 @@ data class PostEntity(
     val published: String = "",
     val author: String = "",
     var likedByMe: Boolean = false,
-    val likeCounter: Int = 0,
+    val likes: Int = 0,
     val shared: Int = 0,
     val video: String = "",
     ) {
@@ -24,7 +24,7 @@ data class PostEntity(
         published,
         author,
         likedByMe,
-        likeCounter,
+        likes,
 //        shared,
 //        video
     )

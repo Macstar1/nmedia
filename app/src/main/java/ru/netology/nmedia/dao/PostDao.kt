@@ -4,12 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.entity.PostEntity
 
 @Dao
 interface PostDao {
     @Query("SELECT * FROM PostEntity ORDER BY id DESC")
-    fun getAll(): LiveData<List<PostEntity>>
+    fun getAll(): List<Post>
 
     @Insert
     fun insert(post: PostEntity)
@@ -22,7 +23,7 @@ interface PostDao {
     @Query(
         """
             UPDATE PostEntity SET
-               likeCounter = likeCounter + CASE WHEN likedByMe THEN -1 ELSE 1 END,
+               likes = likes + CASE WHEN likedByMe THEN -1 ELSE 1 END,
                likedByMe = CASE WHEN likedByMe THEN 0 ELSE 1 END
            WHERE id = :id;
         """

@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 class PostRepositoryHttp : PostRepository {
 
     private companion object {
-        const val BASE_URL = "http://192.168.0.114:9999/"
+        const val BASE_URL = "http://10.0.2.2:9999/"
         val jsonType = "application/json".toMediaType()
 
     }

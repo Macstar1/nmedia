@@ -86,11 +86,11 @@ class OnePostFragment : Fragment() {
             }
         }
 
-//        viewModel.post.observe(viewLifecycleOwner) { posts ->
-//            val post = posts.find { it.id == id }
-//            post?.let { holder.bind(it) }
-//
-//        }
+        viewModel.data.observe(viewLifecycleOwner) { data ->
+            val post = data.posts.find { it.id == id }
+            post?.let { holder.bind(it) }
+
+       }
         return binding.root
     }
 
