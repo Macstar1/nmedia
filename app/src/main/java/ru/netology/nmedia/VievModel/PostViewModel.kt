@@ -4,13 +4,13 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.room.util.copy
 import okio.IOException
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.model.FeedModel
 import ru.netology.nmedia.repository.PostRepository
 import ru.netology.nmedia.repository.PostRepositoryHttp
 import ru.netology.nmedia.util.SingleLiveEvent
-import kotlin.concurrent.thread
 
 private val empty = Post(
     id = 0,
@@ -113,27 +113,52 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 //        }
 //    }
 
-    fun likeById(post: Post) {
-        try {
-            val updatedPost = if (post.likedByMe) {
-                repository.unlikeById(post.id)
-            } else {
-                repository.likeById(post.id)
-            }
+//
+    fun likeById(id: Long) {
+        val currentFeed = _data.value ?: return
 
-            val updatedPosts = _data.value?.posts?.map {
-                if (it.id == updatedPost.id) {
-                    updatedPost
+        val updatedPosts = currentFeed.posts.map { post ->
+            if (post.id == id) {
+                if (post.likedByMe) {
+                    repository.unlikeByIdAsync(object : PostRepository.LikeByIdCallback {
+                        override fun onSuccess(post: Post) {
+                            updatePostInFeed(post)
+                        }
+                        override fun onError(e: Exception) {
+                            _data.postValue(FeedModel(error = true))
+                        }
+                    }, id)
                 } else {
-                    it
-                }
-            }
-            _data.postValue(FeedModel(posts = updatedPosts.orEmpty()))
-        } catch (e: Exception) {
-            _data.postValue(FeedModel(error = true))
-        }
+                    repository.likeByIdAsync(object : PostRepository.LikeByIdCallback {
+                        override fun onSuccess(post: Post) {
+                            updatePostInFeed(post)
+                        }
 
+                        override fun onError(e: Exception) {
+                            _data.postValue(FeedModel(error = true))
+                        }
+                    }, id)
+                }
+                post.copy(likedByMe = !post.likedByMe)
+            } else {
+                post
+            }
+        }
+        _data.value = currentFeed.copy(posts = updatedPosts)
     }
+
+    private fun updatePostInFeed(updatedPost: Post) {
+        val currentFeed = _data.value ?: return
+        val newPosts = currentFeed.posts.map { post ->
+            if (post.id == updatedPost.id) {
+                updatedPost
+            } else {
+                post
+            }
+        }
+        _data.postValue(currentFeed.copy(posts = newPosts))
+    }
+
 
     //    fun removeById(id: Long) {
 //        thread {

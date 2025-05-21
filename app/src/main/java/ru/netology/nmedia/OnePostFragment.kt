@@ -31,7 +31,7 @@ class OnePostFragment : Fragment() {
         val id = arguments?.idArg ?: -1
         val holder = PostViewHolder(binding.post, object : OnInteractionListener {
             override fun onLike(post: Post) {
-                viewModel.likeById(post)
+                viewModel.likeById(post.id)
             }
 
             override fun onRemove(post: Post) {

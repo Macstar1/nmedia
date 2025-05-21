@@ -224,4 +224,12 @@ class PostRepositoryDao(private val db: SQLiteDatabase) : PostRepository {
     override fun removeByIdAsync(callback: PostRepository.RemoveByIdCallback, id: Long) {
         TODO("Not yet implemented")
     }
+
+    override fun unlikeByIdAsync(callback: PostRepository.LikeByIdCallback, id: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun likeByIdAsync(callback: PostRepository.LikeByIdCallback, id: Long) {
+        TODO("Not yet implemented")
+    }
 }

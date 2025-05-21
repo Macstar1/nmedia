@@ -49,38 +49,7 @@ class PostRepositoryHttp : PostRepository {
         val responseBody = requireNotNull(response.body) { "Body is null" }
         return gson.fromJson(responseBody.string(), Post::class.java)
     }
-    fun likeByIdAsync(id: Long, onSuccess: (Post) -> Unit, onError: (Exception) -> Unit) {
-        val request = Request.Builder()
-            .url("${BASE_URL}api/slow/posts/$id/likes")
-            .post(EMPTY_REQUEST)
-            .build()
 
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                onError(e)
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                response.use {
-                    if (!it.isSuccessful) {
-                        onError(IOException("Неуспешный ответ: ${it.code}"))
-                        return
-                    }
-                    val responseBody = it.body?.string()
-                    if (responseBody == null) {
-                        onError(NullPointerException("Тело ответа пустое"))
-                        return
-                    }
-                    try {
-                        val post = gson.fromJson(responseBody, Post::class.java)
-                        onSuccess(post)
-                    } catch (e: Exception) {
-                        onError(e)
-                    }
-                }
-            }
-        })
-    }
 
     override fun unlikeById(id: Long): Post {
 
@@ -95,7 +64,41 @@ class PostRepositoryHttp : PostRepository {
         return gson.fromJson(responseBody.string(), Post::class.java)
     }
 
-    fun unlikeByIdAsync(id: Long, onSuccess: (Post) -> Unit, onError: (Exception) -> Unit) {
+
+    override fun likeByIdAsync(callback: PostRepository.LikeByIdCallback, id: Long) {
+        val request = Request.Builder()
+            .url("${BASE_URL}api/slow/posts/$id/likes")
+            .post(EMPTY_REQUEST)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                callback.onError(e)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!it.isSuccessful) {
+                        callback.onError(IOException("Неуспешный ответ: ${it.code}"))
+                        return
+                    }
+                    val responseBody = it.body?.string()
+                    if (responseBody == null) {
+                        callback.onError(NullPointerException("Тело ответа пустое"))
+                        return
+                    }
+                    try {
+                        val post = gson.fromJson(responseBody, Post::class.java)
+                        callback.onSuccess(post)
+                    } catch (e: Exception) {
+                        callback.onError(e)
+                    }
+                }
+            }
+        })
+    }
+
+    override fun unlikeByIdAsync(callback: PostRepository.LikeByIdCallback, id: Long) {
         val request = Request.Builder()
             .url("${BASE_URL}api/slow/posts/$id/likes")
             .delete()
@@ -103,30 +106,31 @@ class PostRepositoryHttp : PostRepository {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                onError(e)
+                callback.onError(e)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.use {
-                    if (!it.isSuccessful) {
-                        onError(IOException("Неуспешный ответ: ${it.code}"))
+                    if (!response.isSuccessful) {
+                        callback.onError(IOException("Неуспешный ответ: ${response.code}"))
                         return
                     }
-                    val responseBody = it.body?.string()
+                    val responseBody = response.body?.string()
                     if (responseBody == null) {
-                        onError(NullPointerException("Тело ответа пустое"))
+                        callback.onError(NullPointerException("Пустое тело ответа"))
                         return
                     }
                     try {
                         val post = gson.fromJson(responseBody, Post::class.java)
-                        onSuccess(post)
+                        callback.onSuccess(post)
                     } catch (e: Exception) {
-                        onError(e)
+                        callback.onError(e)
                     }
                 }
             }
         })
     }
+
 
     override fun removeById(id: Long) {
         val request: Request = Request.Builder()
@@ -161,6 +165,7 @@ class PostRepositoryHttp : PostRepository {
                 }
             })
     }
+
 
     override fun save(post: Post): Post {
         val request = Request.Builder()

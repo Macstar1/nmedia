@@ -150,6 +150,14 @@ class PostRepositoryFile(private val context: Context) : PostRepository {
         TODO("Not yet implemented")
     }
 
+    override fun unlikeByIdAsync(callback: PostRepository.LikeByIdCallback, id: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun likeByIdAsync(callback: PostRepository.LikeByIdCallback, id: Long) {
+        TODO("Not yet implemented")
+    }
+
     private fun sync() {
         context.openFileOutput(FILENAME, Context.MODE_PRIVATE).bufferedWriter().use {
             it.write(gson.toJson(posts))

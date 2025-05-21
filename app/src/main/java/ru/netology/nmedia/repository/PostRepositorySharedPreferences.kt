@@ -143,6 +143,14 @@ class PostRepositorySharedPreferences(context: Context) : PostRepository {
         TODO("Not yet implemented")
     }
 
+    override fun unlikeByIdAsync(callback: PostRepository.LikeByIdCallback, id: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun likeByIdAsync(callback: PostRepository.LikeByIdCallback, id: Long) {
+        TODO("Not yet implemented")
+    }
+
     private fun sync() {
         prefs.edit().apply {
             putString(KEY, gson.toJson(posts))
