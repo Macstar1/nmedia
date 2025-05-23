@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.room.util.copy
 import okio.IOException
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.model.FeedModel
@@ -29,7 +28,6 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     private val _data = MutableLiveData(FeedModel())
     val data: LiveData<FeedModel> = _data
 
-    //val post = repository.getAll()
     val edited = MutableLiveData(empty)
     private val _postCreated = SingleLiveEvent<Unit>()
     val postCreated: LiveData<Unit> = _postCreated
@@ -113,38 +111,34 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 //        }
 //    }
 
-//
+    //
+
     fun likeById(id: Long) {
         val currentFeed = _data.value ?: return
 
-        val updatedPosts = currentFeed.posts.map { post ->
-            if (post.id == id) {
-                if (post.likedByMe) {
-                    repository.unlikeByIdAsync(object : PostRepository.LikeByIdCallback {
-                        override fun onSuccess(post: Post) {
-                            updatePostInFeed(post)
-                        }
-                        override fun onError(e: Exception) {
-                            _data.postValue(FeedModel(error = true))
-                        }
-                    }, id)
-                } else {
-                    repository.likeByIdAsync(object : PostRepository.LikeByIdCallback {
-                        override fun onSuccess(post: Post) {
-                            updatePostInFeed(post)
-                        }
+        val post = currentFeed.posts.find { it.id == id } ?: return
 
-                        override fun onError(e: Exception) {
-                            _data.postValue(FeedModel(error = true))
-                        }
-                    }, id)
+        if (post.likedByMe) {
+            repository.unlikeByIdAsync(object : PostRepository.LikeByIdCallback {
+                override fun onSuccess(post: Post) {
+                    updatePostInFeed(post)
                 }
-                post.copy(likedByMe = !post.likedByMe)
-            } else {
-                post
-            }
+
+                override fun onError(e: Exception) {
+                    _data.postValue(FeedModel(error = true))
+                }
+            }, id)
+        } else {
+            repository.likeByIdAsync(object : PostRepository.LikeByIdCallback {
+                override fun onSuccess(post: Post) {
+                    updatePostInFeed(post)
+                }
+
+                override fun onError(e: Exception) {
+                    _data.postValue(FeedModel(error = true))
+                }
+            }, id)
         }
-        _data.value = currentFeed.copy(posts = updatedPosts)
     }
 
     private fun updatePostInFeed(updatedPost: Post) {
@@ -178,17 +172,20 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     fun removeById(id: Long) {
         val old = _data.value
+
         val updatePosts = _data.value?.posts.orEmpty().filter {
             it.id != id
         }
-
         _data.postValue(FeedModel(posts = updatePosts))
-        try {
-            repository.removeById(id)
-        } catch (e: IOException) {
-            _data.postValue(old)
-        }
 
+        repository.removeByIdAsync(object : PostRepository.RemoveByIdCallback {
+
+            override fun onSuccess(id: Long) {}
+
+            override fun onError(e: Exception) {
+                _data.postValue(old)
+            }
+        }, id)
     }
 
     fun saveContent(content: String) {
