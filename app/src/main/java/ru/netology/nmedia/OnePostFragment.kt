@@ -41,7 +41,6 @@ class OnePostFragment : Fragment() {
 
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
-
             }
 
             override fun onShare(post: Post) {
