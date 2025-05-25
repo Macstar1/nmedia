@@ -8,6 +8,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostCardBinding
 import ru.netology.nmedia.dto.Post
@@ -48,6 +49,9 @@ class PostViewHolder(
     private val onInteractionListener: OnInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
     @SuppressLint("SetTextI18n")
+    private val urls = listOf("netology.jpg", "sber.jpg", "tcs.jpg", "404.png")
+    private var index = 0
+
     fun bind(post: Post) = with(binding) {
         mainText.text = post.content
         messageText.text = post.author
@@ -91,6 +95,14 @@ class PostViewHolder(
                 }
             }.show()
         }
+        val url = "http://10.0.2.2:9999/avatars/${urls[index++]}"
+        Glide.with(binding.icAvatar48dp)
+            .load("http://10.0.2.2:9999/avatars/${post.authorAvatar}")
+            .placeholder(R.drawable.ic_work)
+            .error(R.drawable.ic_error)
+            .circleCrop()
+            .timeout(10_000)
+            .into(icAvatar48dp)
     }
 
     private fun toShort(i: Int): String {

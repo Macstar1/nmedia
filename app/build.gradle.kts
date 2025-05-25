@@ -79,6 +79,6 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
 
-
-
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
 }

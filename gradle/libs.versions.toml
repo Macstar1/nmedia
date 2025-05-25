@@ -44,6 +44,8 @@ okhttp = { module = "com.squareup.okhttp3:okhttp" }
 okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttpBom" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomKtx" }
 androidx-room-runtime-android = { group = "androidx.room", name = "room-runtime-android", version.ref = "roomRuntimeAndroid" }
+glide = "com.github.bumptech.glide:glide:4.15.1"
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version = "4.15.1" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
