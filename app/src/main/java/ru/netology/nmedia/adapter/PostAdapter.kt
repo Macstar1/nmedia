@@ -49,8 +49,6 @@ class PostViewHolder(
     private val onInteractionListener: OnInteractionListener,
 ) : RecyclerView.ViewHolder(binding.root) {
     @SuppressLint("SetTextI18n")
-    private val urls = listOf("netology.jpg", "sber.jpg", "tcs.jpg", "404.png")
-    private var index = 0
 
     fun bind(post: Post) = with(binding) {
         mainText.text = post.content
@@ -95,7 +93,7 @@ class PostViewHolder(
                 }
             }.show()
         }
-        val url = "http://10.0.2.2:9999/avatars/${urls[index++]}"
+
         Glide.with(binding.icAvatar48dp)
             .load("http://10.0.2.2:9999/avatars/${post.authorAvatar}")
             .placeholder(R.drawable.ic_work)

@@ -25,18 +25,25 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     buildTypes {
-        release {
+        getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            manifestPlaceholders["usesCleartextTraffic"] = "false"
+            buildConfigField("String", "BASE_URL", "\"https://netomedia.ru\"")
         }
-
+        getByName("debug") {
+            manifestPlaceholders["usesCleartextTraffic"] = "true"
+            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:9999\"")
+        }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -81,4 +88,7 @@ dependencies {
 
     implementation(libs.glide)
     kapt(libs.glide.compiler)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 }
