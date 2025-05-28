@@ -1,5 +1,6 @@
 package ru.netology.nmedia.repository
 
+import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.Call
@@ -173,14 +174,19 @@ class PostRepositoryHttp : PostRepository {
 
 
     override fun save(post: Post): Post {
-        val request = Request.Builder()
-            .post(gson.toJson(post, Post::class.java).toRequestBody(jsonType))
-            .url("${BASE_URL}api/slow/posts")
-            .build()
+        return try {
+            val request = Request.Builder()
+                .post(gson.toJson(post, Post::class.java).toRequestBody(jsonType))
+                .url("${BASE_URL}api/slow/posts")
+                .build()
 
-        return executeRequest(request) { response ->
-            val body = requireNotNull(response.body) { "Body is null" }
-            gson.fromJson(body.string(), Post::class.java)
+            executeRequest(request) { response ->
+                val body = requireNotNull(response.body) { "Body is null" }
+                gson.fromJson(body.string(), Post::class.java)
+            }
+        } catch (e: Exception) {
+            Log.e("PostRepositoryHttp", "Ошибка при сохранении поста", e)
+            throw e
         }
     }
 
