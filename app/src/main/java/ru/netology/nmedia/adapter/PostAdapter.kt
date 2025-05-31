@@ -95,7 +95,7 @@ class PostViewHolder(
         }
 
         Glide.with(binding.icAvatar48dp)
-            .load("http://10.0.2.2:9999/avatars/${post.authorAvatar}")
+            .load("http://192.168.0.114:9999/avatars/${post.authorAvatar}")
             .placeholder(R.drawable.ic_work)
             .error(R.drawable.ic_error)
             .circleCrop()

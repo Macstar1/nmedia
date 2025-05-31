@@ -13,7 +13,7 @@ import retrofit2.http.Path
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.BuildConfig
 
-private const val BASE_URL = "http://10.0.2.2:9999/api/slow/"
+private const val BASE_URL = "http://192.168.0.114/api/slow/"
 
 interface PostsApiService {
     @GET("posts")

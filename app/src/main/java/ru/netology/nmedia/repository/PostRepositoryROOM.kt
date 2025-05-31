@@ -54,25 +54,6 @@ class PostRepositoryROOM(
         TODO("Not yet implemented")
     }
 
-    override fun getAll(): List<Post> {
-        TODO("Not yet implemented")
-    }
-
-    override fun likeById(id: Long): Post {
-        TODO("Not yet implemented")
-    }
-
-    override fun unlikeById(id: Long): Post {
-        TODO("Not yet implemented")
-    }
-
-    override fun removeById(id: Long) {
-        TODO("Not yet implemented")
-    }
-
-    override fun save(post: Post): Post {
-        TODO("Not yet implemented")
-    }
 
     override fun undo(post: Post) {
         TODO("Not yet implemented")

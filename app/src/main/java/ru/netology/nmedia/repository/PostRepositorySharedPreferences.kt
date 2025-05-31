@@ -85,10 +85,10 @@ class PostRepositorySharedPreferences(context: Context) : PostRepository {
 //        }
 //        data.value = posts
     }
-
-    override fun getAll(): List<Post> = data as List<Post>
-
-    override fun likeById(id: Long): Post {
+//
+//    override fun getAll(): List<Post> = data as List<Post>
+//
+//    override fun likeById(id: Long): Post {
 //        posts = posts.map {
 //            if (it.id != id) it
 //            else {
@@ -103,29 +103,29 @@ class PostRepositorySharedPreferences(context: Context) : PostRepository {
 //            }
 //        }
 //        data.value = posts
-        return TODO("Provide the return value")
-    }
+//        return TODO("Provide the return value")
+//    }
 
-    override fun unlikeById(id: Long): Post {
-        TODO("Not yet implemented")
-    }
-
-    override fun removeById(id: Long) {
-        posts = posts.filter { it.id != id }
-        data.value = posts
-    }
-
-    override fun save(post: Post): Post {
-        posts = if (post.id == 0L) {
-            listOf(post.copy(id = nextId++, author = "Me", published = "Now")) + posts
-        } else {
-            posts.map {
-                if (it.id != post.id) it else it.copy(content = post.content)
-            }
-        }
-        data.value = posts
-        return TODO("Provide the return value")
-    }
+//    override fun unlikeById(id: Long): Post {
+//        TODO("Not yet implemented")
+//    }
+//
+//    override fun removeById(id: Long) {
+//        posts = posts.filter { it.id != id }
+//        data.value = posts
+//    }
+//
+//    override fun save(post: Post): Post {
+//        posts = if (post.id == 0L) {
+//            listOf(post.copy(id = nextId++, author = "Me", published = "Now")) + posts
+//        } else {
+//            posts.map {
+//                if (it.id != post.id) it else it.copy(content = post.content)
+//            }
+//        }
+//        data.value = posts
+//        return TODO("Provide the return value")
+//    }
 
     override fun undo(post: Post) {
         data.value = posts

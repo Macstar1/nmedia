@@ -78,6 +78,8 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging.ktx)
 
+    implementation(libs.androidx.swiperefreshlayout)
+
 
     // define a BOM and its version
     implementation(platform(libs.okhttp.bom))
